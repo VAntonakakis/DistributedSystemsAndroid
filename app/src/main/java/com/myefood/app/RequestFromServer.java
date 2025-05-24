@@ -29,6 +29,10 @@ public class RequestFromServer<T> extends Thread {
              ObjectInputStream in = new ObjectInputStream(socket.getInputStream())) {
 
             // Στείλε την εντολή ή δεδομένα
+            out.writeObject("Lat::38.01");
+            out.flush();
+            out.writeObject("Lon::23.76");
+            out.flush();
             out.writeObject(requestData);
             out.flush();
 
