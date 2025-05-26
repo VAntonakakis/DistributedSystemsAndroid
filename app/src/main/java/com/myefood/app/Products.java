@@ -19,7 +19,7 @@ public class Products extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products);
 
-        ListView listView = findViewById(R.id.productsList);
+        ListView listView = findViewById(R.id.ProductsList);
 
         List<String> productslist = new ArrayList<>();
         //to do

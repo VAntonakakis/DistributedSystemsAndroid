@@ -20,17 +20,21 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         button = findViewById(R.id.loginButton);
-        EditText username = findViewById(R.id.username);
-        EditText password = findViewById(R.id.password);
+        EditText username = findViewById(R.id.Username);
+        EditText password = findViewById(R.id.Password);
+        EditText Longitude = findViewById(R.id.MainLongitude);
+        EditText Latitude = findViewById(R.id.MainLatitude);
 
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String uname = username.getText().toString();
-                String pass = password.getText().toString();
+                String Uname = username.getText().toString();
+                String Pass = password.getText().toString();
+                String longitude = Longitude.getText().toString();
+                String latitude = Latitude.getText().toString();
 
-                if (uname.equals("u") && pass.equals("u")){
+                if (Uname.equals("u") && Pass.equals("u")){
                     Toast.makeText(getApplicationContext(), "User connecting...", Toast.LENGTH_SHORT).show();
                     try {
                         Thread.sleep(1000);
@@ -38,9 +42,11 @@ public class MainActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     Intent intent = new Intent(getApplicationContext(), ShopMenu.class);
+                    intent.putExtra("Longitude", longitude);
+                    intent.putExtra("Latitude", latitude);
                     startActivity(intent);
                     }
-                else if (uname.equals("m") && pass.equals("m")){
+                else if (Uname.equals("m") && Pass.equals("m")){
                     Toast.makeText(getApplicationContext(), "Manager connecting...", Toast.LENGTH_SHORT).show();
                     try {
                         Thread.sleep(1000);

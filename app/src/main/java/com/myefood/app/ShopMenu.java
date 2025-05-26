@@ -21,15 +21,13 @@ public class ShopMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop_menu);
 
-        ListView listView = findViewById(R.id.menuList);
+        ListView listView = findViewById(R.id.StoreMenuList);
 
         ArrayList<String> shopList = new ArrayList<>();
         //to do
         // pairnei ola ta magazia kai ta bazei se auto to array list
-//        list.add("Holly crepes");
-//        list.add("I love souvlaki");
-//        list.add("Arancini");
-//        list.add("Wallstreet Athens");
+        shopList.add(getIntent().getStringExtra("Longitude"));
+        shopList.add(getIntent().getStringExtra("Latitude"));
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, shopList);
         listView.setAdapter(arrayAdapter);

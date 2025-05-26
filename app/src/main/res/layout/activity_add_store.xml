@@ -9,123 +9,133 @@
     tools:context=".add_store">
 
     <EditText
-        android:id="@+id/editTextText"
+        android:id="@+id/StoreName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/edit_text"
         android:ems="10"
         android:hint="Store name"
-        android:textColorHint="#FF000000"
         android:inputType="text"
         android:textColor="#000000"
-        android:background="@drawable/edit_text"
+        android:textColorHint="#FF000000"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextText2"
+        android:id="@+id/StoreLog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
         android:layout_marginTop="30dp"
+        android:background="@drawable/edit_text"
         android:ems="10"
         android:hint="Store Longitude"
-        android:textColorHint="#FF000000"
         android:inputType="text"
         android:textColor="#000000"
-        android:background="@drawable/edit_text"
+        android:textColorHint="#FF000000"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText" />
+        app:layout_constraintTop_toBottomOf="@+id/StoreName" />
 
     <EditText
-        android:id="@+id/editTextText3"
+        android:id="@+id/StoreLat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
         android:layout_marginTop="30dp"
+        android:background="@drawable/edit_text"
         android:ems="10"
         android:hint="Store Latitude"
-        android:textColorHint="#FF000000"
         android:inputType="text"
         android:textColor="#000000"
-        android:background="@drawable/edit_text"
+        android:textColorHint="#FF000000"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText2" />
+        app:layout_constraintTop_toBottomOf="@+id/StoreLog" />
 
     <EditText
-        android:id="@+id/editTextText4"
+        android:id="@+id/StoreFoodCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
         android:layout_marginTop="30dp"
+        android:background="@drawable/edit_text"
         android:ems="10"
         android:hint="Food Category"
-        android:textColorHint="#FF000000"
         android:inputType="text"
         android:textColor="#000000"
-        android:background="@drawable/edit_text"
+        android:textColorHint="#FF000000"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText3" />
+        app:layout_constraintTop_toBottomOf="@+id/StoreLat" />
 
     <EditText
-        android:id="@+id/editTextText5"
+        android:id="@+id/StoreStars"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
         android:layout_marginTop="30dp"
+        android:background="@drawable/edit_text"
         android:ems="10"
         android:hint="Stars"
-        android:textColorHint="#FF000000"
         android:inputType="text"
         android:textColor="#000000"
-        android:background="@drawable/edit_text"
+        android:textColorHint="#FF000000"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText4" />
+        app:layout_constraintTop_toBottomOf="@+id/StoreFoodCategory" />
 
     <EditText
-        android:id="@+id/editTextText6"
+        android:id="@+id/StoreVotes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
         android:layout_marginTop="30dp"
+        android:background="@drawable/edit_text"
         android:ems="10"
         android:hint="Votes"
-        android:textColorHint="#FF000000"
         android:inputType="text"
         android:textColor="#000000"
-        android:background="@drawable/edit_text"
+        android:textColorHint="#FF000000"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText5" />
+        app:layout_constraintTop_toBottomOf="@+id/StoreStars" />
 
     <EditText
-        android:id="@+id/editTextText7"
+        android:id="@+id/StoreLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
         android:layout_marginTop="30dp"
+        android:background="@drawable/edit_text"
         android:ems="10"
         android:hint="Logo"
-        android:textColorHint="#FF000000"
         android:inputType="text"
         android:textColor="#000000"
-        android:background="@drawable/edit_text"
+        android:textColorHint="#FF000000"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText6" />
+        app:layout_constraintTop_toBottomOf="@+id/StoreVotes" />
 
     <EditText
-        android:id="@+id/editTextText8"
+        android:id="@+id/StoreId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
         android:layout_marginTop="30dp"
+        android:background="@drawable/edit_text"
         android:ems="10"
         android:hint="Store ID"
-        android:textColorHint="#FF000000"
         android:inputType="text"
         android:textColor="#000000"
-        android:background="@drawable/edit_text"
+        android:textColorHint="#FF000000"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText7" />
+        app:layout_constraintTop_toBottomOf="@+id/StoreLogo" />
+
+    <Button
+        android:id="@+id/AddStoreButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:text="Add Store"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
