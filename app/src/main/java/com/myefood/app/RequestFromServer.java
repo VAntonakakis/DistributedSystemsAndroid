@@ -6,53 +6,49 @@ import android.util.Log;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.IOException;
 import java.net.Socket;
-import java.util.ArrayList;
 
 public class RequestFromServer<T> extends Thread {
 
+    private final Object requestObject;
     private final Handler handler;
-    private final ArrayList<T> resultList;
-    private final Object requestData;
 
-    public RequestFromServer(Handler handler, ArrayList<T> resultList, Object requestData) {
+    public RequestFromServer(Handler handler, Object requestObject) {
         this.handler = handler;
-        this.resultList = resultList;
-        this.requestData = requestData;
+        this.requestObject = requestObject;
     }
 
     @Override
     public void run() {
-        try (Socket socket = new Socket("192.168.68.113", 5012);
+        try (Socket socket = new Socket("192.168.68.102", 5012);
              ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
              ObjectInputStream in = new ObjectInputStream(socket.getInputStream())) {
 
-            // Στείλε την εντολή ή δεδομένα
-            out.writeObject("Lat::38.01");
+//            out.writeObject("Lat::38.01");
+//            out.flush();
+//            out.writeObject("Lon::23.76");
+//            out.flush();
+            out.writeObject("admin");
             out.flush();
-            out.writeObject("Lon::23.76");
+
+            out.writeObject(requestObject);
             out.flush();
-            out.writeObject(requestData);
-            out.flush();
+            Log.d("vaggelis", "request object: " + requestObject);
+            Thread.sleep(100);
 
-            // Δέξου απάντηση: μια λίστα από αντικείμενα τύπου T
-            Object received = in.readObject();
+            Object response = in.readObject();
+            Log.d("vaggelis", "response: " + response.getClass().getSimpleName());
 
-            if (received instanceof ArrayList) {
-                resultList.clear();
-                resultList.addAll((ArrayList<T>) received);
+            Message msg = Message.obtain();
+            msg.what = 1; // success
+            msg.obj = response;
+            handler.sendMessage(msg);
 
-                Log.d("SERVER", "Λήφθηκαν " + resultList.size() + " αντικείμενα");
-                handler.sendEmptyMessage(1); // επιτυχία
-            } else {
-                throw new IOException("Μη αναμενόμενη απάντηση από τον server.");
-            }
-
-        } catch (IOException | ClassNotFoundException e) {
-            Log.e("SERVER", "Σφάλμα επικοινωνίας", e);
-            Message msg = handler.obtainMessage(0, e.getMessage());
-            handler.sendMessage(msg); // στείλε σφάλμα πίσω στο UI thread
+        } catch (Exception e) {
+            e.printStackTrace();
+            Message msg = Message.obtain();
+            msg.what = -1; // failure
+            handler.sendMessage(msg);
         }
     }
 }

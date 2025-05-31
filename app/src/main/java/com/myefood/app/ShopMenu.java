@@ -5,16 +5,24 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.view.View;
-import android.widget.AdapterView;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity;
-import java.util.ArrayList;
+import org.example.Store;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class ShopMenu extends AppCompatActivity {
+
+    private ArrayList<Store> storeList = new ArrayList<>();
+    private ArrayList<String> storeNames = new ArrayList<>();
+    private ArrayAdapter<String> arrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,40 +31,46 @@ public class ShopMenu extends AppCompatActivity {
 
         ListView listView = findViewById(R.id.StoreMenuList);
 
-        ArrayList<String> shopList = new ArrayList<>();
-        //to do
-        // pairnei ola ta magazia kai ta bazei se auto to array list
-        shopList.add(getIntent().getStringExtra("Longitude"));
-        shopList.add(getIntent().getStringExtra("Latitude"));
-
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, shopList);
+        arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, storeNames);
         listView.setAdapter(arrayAdapter);
 
+        // Handler για την επικοινωνία με το UI Thread
         Handler handler = new Handler(Looper.getMainLooper()) {
             @Override
             public void handleMessage(Message msg) {
-                if (msg.what == 1) {
-                    arrayAdapter.notifyDataSetChanged(); // ενημέρωση UI
+                if (msg.what == -1) {
+                    Toast.makeText(ShopMenu.this, "Σφάλμα από τον server", Toast.LENGTH_SHORT).show();
                 } else {
-                    String error = (String) msg.obj;
-                    Toast.makeText(ShopMenu.this, "Σφάλμα: " + error, Toast.LENGTH_SHORT).show();
+                    @SuppressWarnings("unchecked")
+                    Map.Entry<Integer,List<Store>> kvp = (Map.Entry<Integer, List<Store>>)msg.obj;
+                    List<Store> newStores = kvp.getValue();
+
+                    Log.d("SERVER", "Received stores: " + newStores.size());
+
+                    storeList.clear();
+                    storeList.addAll(newStores);
+
+                    storeNames.clear();
+                    for (Store s : storeList) {
+                        Log.d("vaggelis", "Store: " + s);
+                        storeNames.add(s.toString());
+                    }
+
+                    arrayAdapter.notifyDataSetChanged();
                 }
             }
         };
 
-        RequestFromServer<String> thread = new RequestFromServer<>(handler, shopList, "send");
-        thread.start();
+        // Εκτέλεση του thread με handler
+        new RequestFromServer<>(handler, "send").start();
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String selectedShop = shopList.get(position);
-                Intent intent = new Intent(ShopMenu.this, Products.class);
-                intent.putExtra("shopName", selectedShop);
-                startActivity(intent);
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            Store selectedStore = storeList.get(position);
+            Intent intent = new Intent(ShopMenu.this, Products.class);
+            intent.putExtra("shopName", selectedStore); // Store πρέπει να υλοποιεί Serializable
+            startActivity(intent);
 
-                Toast.makeText(ShopMenu.this, "Επέλεξες: " + selectedShop, Toast.LENGTH_SHORT).show();
-            }
+            Toast.makeText(ShopMenu.this, "Επέλεξες: " + selectedStore.getName(), Toast.LENGTH_SHORT).show();
         });
     }
 }
