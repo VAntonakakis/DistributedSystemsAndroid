@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra("Longitude", longitude);
                     intent.putExtra("Latitude", latitude);
                     startActivity(intent);
-                    }
+                }
                 else if (Uname.equals("m") && Pass.equals("m")){
                     //Toast.makeText(getApplicationContext(), "Manager connecting...", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(), manager_menu.class);

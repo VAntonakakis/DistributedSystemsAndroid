@@ -25,13 +25,12 @@ public class RequestFromServer<T> extends Thread {
         this.requestObject = requestObject;
         this.lat = lat;
         this.lon = lon;
-
     }
 
 
     @Override
     public void run() {
-        try (Socket socket = new Socket("192.168.68.102", 5012);
+        try (Socket socket = new Socket("192.168.1.122", 5012);
              ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
              ObjectInputStream in = new ObjectInputStream(socket.getInputStream())) {
             if(this.lat != null) {

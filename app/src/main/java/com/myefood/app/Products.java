@@ -30,7 +30,7 @@ public class Products extends AppCompatActivity {
 
         ListView listView = findViewById(R.id.ProductsList);
 
-        productlist = (((Store)getIntent().getSerializableExtra("store")).getProducts());
+        productlist = ((Store)getIntent().getSerializableExtra("store")).getProducts();
         List<String> productName = new ArrayList<>();
         for(Product p : productlist){
             productName.add("Category: "+ p.getType() + "\nItem name: " + p.getName()+ " " + "\nPrice: " + p.getPrice()+ "$");
@@ -53,6 +53,7 @@ public class Products extends AppCompatActivity {
         findViewById(R.id.viewCartButton).setOnClickListener(v -> {
             Intent intent = new Intent(Products.this, Cart.class);
             intent.putExtra("cart", new HashMap<>(cart));
+            intent.putExtra("store", ((Store)getIntent().getSerializableExtra("store")));
             startActivity(intent);
         });
 
