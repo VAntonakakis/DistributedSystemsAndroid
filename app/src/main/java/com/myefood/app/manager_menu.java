@@ -5,18 +5,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 import org.example.Store;
-
 import androidx.appcompat.app.AppCompatActivity;
-
-import org.example.Store;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +33,6 @@ public class manager_menu extends AppCompatActivity {
         arrayAdapter = new ArrayAdapter<>(this, R.layout.list_item, R.id.storeName, storeList);
         listView.setAdapter(arrayAdapter);
 
-        // Handler για την επικοινωνία με το UI Thread
         Handler handler = new Handler(Looper.getMainLooper()) {
             @Override
             public void handleMessage(Message msg) {

@@ -17,6 +17,7 @@ public class add_store extends AppCompatActivity {
         setContentView(R.layout.activity_add_store);
 
         Button AddStoreButton = findViewById(R.id.AddStoreButton);
+
         AddStoreButton.setOnClickListener(view -> {
             String name = ((EditText) findViewById(R.id.StoreName)).getText().toString();
             double log = Double.parseDouble(((EditText) findViewById(R.id.StoreLog)).getText().toString());

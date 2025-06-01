@@ -37,7 +37,6 @@ public class ShopMenu extends AppCompatActivity {
         arrayAdapter = new ArrayAdapter<>(this, R.layout.list_item, R.id.storeName, storeNames);
         listView.setAdapter(arrayAdapter);
 
-        // Handler για την επικοινωνία με το UI Thread
         Handler handler = new Handler(Looper.getMainLooper()) {
             @Override
             public void handleMessage(Message msg) {

@@ -7,11 +7,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import org.example.Product;
 import org.example.Store;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

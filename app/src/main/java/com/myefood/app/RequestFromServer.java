@@ -52,7 +52,7 @@ public class RequestFromServer<T> extends Thread {
         try (Socket socket = new Socket("192.168.1.122", 5012);
              ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
              ObjectInputStream in = new ObjectInputStream(socket.getInputStream())) {
-            Log.d("vaggelis", "fsdkjhgsdf object: " + requestObject);
+
             if (myStore != null) {
                 out.writeObject(myStore);
                 out.flush();
@@ -84,12 +84,8 @@ public class RequestFromServer<T> extends Thread {
                 out.flush();
             }
 
-
-            Log.d("vaggelis", "request object: " + requestObject);
             Thread.sleep(100);
-
             Object response = in.readObject();
-            Log.d("vaggelis", "response: " + response.getClass().getSimpleName());
 
             Message msg = Message.obtain();
             msg.what = 1; // success

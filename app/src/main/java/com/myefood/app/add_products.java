@@ -20,11 +20,11 @@ public class add_products extends AppCompatActivity {
     @SuppressLint("MissingInflatedId")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_add_products);
-        Button button = findViewById(R.id.AddProductButton);
 
+        Button button = findViewById(R.id.AddProductButton);
         Store s = (Store) getIntent().getSerializableExtra("store");
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

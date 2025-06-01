@@ -9,12 +9,10 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
 import androidx.appcompat.app.AppCompatActivity;
-
 import org.example.Product;
 import org.example.Store;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,7 +20,6 @@ public class Cart extends AppCompatActivity {
 
     private ListView cartListView;
     private Map<Product, Integer> cart;
-
     Product p;
 
     @Override
@@ -52,7 +49,7 @@ public class Cart extends AppCompatActivity {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.list_item, R.id.storeName, items);
         cartListView.setAdapter(adapter);
-        Log.d("vaggelis", "caiguawefrt: " + cart);
+
         backButton.setOnClickListener( new View.OnClickListener(){
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), Products.class);
@@ -60,20 +57,13 @@ public class Cart extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         orderButton.setOnClickListener( new View.OnClickListener(){
             public void onClick(View v) {
                 new RequestFromServer<>(null, "neworder::" + ((Store)getIntent().getSerializableExtra("store")).getStoreID(), cart).start();
-                Log.d("vaggelis", "cart: " + cart);
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
             }
         });
     }
 }
-/*
-StringBuilder sb = new StringBuilder("neworder::" + store.getStoreID());
-        for (Map.Entry<Product, Integer> entry : cart.entrySet()) {
-        sb.append("::").append(entry.getKey().getName())
-        .append("::").append(entry.getValue());
-        }
- */
