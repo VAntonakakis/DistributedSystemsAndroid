@@ -35,24 +35,14 @@ public class MainActivity extends AppCompatActivity {
                 String latitude = Latitude.getText().toString();
 
                 if (Uname.equals("u") && Pass.equals("u")){
-                    Toast.makeText(getApplicationContext(), "User connecting...", Toast.LENGTH_SHORT).show();
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    //Toast.makeText(getApplicationContext(), "User connecting...", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(), ShopMenu.class);
                     intent.putExtra("Longitude", longitude);
                     intent.putExtra("Latitude", latitude);
                     startActivity(intent);
                     }
                 else if (Uname.equals("m") && Pass.equals("m")){
-                    Toast.makeText(getApplicationContext(), "Manager connecting...", Toast.LENGTH_SHORT).show();
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    //Toast.makeText(getApplicationContext(), "Manager connecting...", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(), manager_menu.class);
                     startActivity(intent);
                 }else {

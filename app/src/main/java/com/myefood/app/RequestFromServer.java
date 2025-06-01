@@ -12,27 +12,46 @@ public class RequestFromServer<T> extends Thread {
 
     private final Object requestObject;
     private final Handler handler;
+    private String lat = null;
+    private String lon = null;
 
     public RequestFromServer(Handler handler, Object requestObject) {
         this.handler = handler;
         this.requestObject = requestObject;
     }
 
+    public  RequestFromServer(Handler handler, Object requestObject, String lat, String lon){
+        this.handler = handler;
+        this.requestObject = requestObject;
+        this.lat = lat;
+        this.lon = lon;
+
+    }
+
+
     @Override
     public void run() {
         try (Socket socket = new Socket("192.168.68.102", 5012);
              ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
              ObjectInputStream in = new ObjectInputStream(socket.getInputStream())) {
+            if(this.lat != null) {
+                out.writeObject("Lat::" + lat);
+                out.flush();
+                out.writeObject("Lon::" + lon);
+                out.flush();
+                out.writeObject(requestObject);
+                out.flush();
+            }else if(requestObject.equals("admin")){
+                out.writeObject(requestObject);
+                out.flush();
+                out.writeObject("send");
+                out.flush();
+            }else{
+                out.writeObject(requestObject);
+                out.flush();
+            }
 
-//            out.writeObject("Lat::38.01");
-//            out.flush();
-//            out.writeObject("Lon::23.76");
-//            out.flush();
-            out.writeObject("admin");
-            out.flush();
 
-            out.writeObject(requestObject);
-            out.flush();
             Log.d("vaggelis", "request object: " + requestObject);
             Thread.sleep(100);
 

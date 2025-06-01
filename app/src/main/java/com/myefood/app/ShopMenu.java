@@ -29,9 +29,12 @@ public class ShopMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop_menu);
 
+        String lon = getIntent().getStringExtra("Longitude");
+        String lat = getIntent().getStringExtra("Latitude");
+
         ListView listView = findViewById(R.id.StoreMenuList);
 
-        arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, storeNames);
+        arrayAdapter = new ArrayAdapter<>(this, R.layout.list_item, R.id.storeName, storeNames);
         listView.setAdapter(arrayAdapter);
 
         // Handler για την επικοινωνία με το UI Thread
@@ -45,15 +48,12 @@ public class ShopMenu extends AppCompatActivity {
                     Map.Entry<Integer,List<Store>> kvp = (Map.Entry<Integer, List<Store>>)msg.obj;
                     List<Store> newStores = kvp.getValue();
 
-                    Log.d("SERVER", "Received stores: " + newStores.size());
-
                     storeList.clear();
                     storeList.addAll(newStores);
 
                     storeNames.clear();
                     for (Store s : storeList) {
-                        Log.d("vaggelis", "Store: " + s);
-                        storeNames.add(s.toString());
+                        storeNames.add(s.getName());
                     }
 
                     arrayAdapter.notifyDataSetChanged();
@@ -61,16 +61,15 @@ public class ShopMenu extends AppCompatActivity {
             }
         };
 
-        // Εκτέλεση του thread με handler
-        new RequestFromServer<>(handler, "send").start();
+        new RequestFromServer<>(handler, "send", lat, lon).start();
 
         listView.setOnItemClickListener((parent, view, position, id) -> {
             Store selectedStore = storeList.get(position);
             Intent intent = new Intent(ShopMenu.this, Products.class);
-            intent.putExtra("shopName", selectedStore); // Store πρέπει να υλοποιεί Serializable
+            intent.putExtra("store", selectedStore);
             startActivity(intent);
 
-            Toast.makeText(ShopMenu.this, "Επέλεξες: " + selectedStore.getName(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(ShopMenu.this, "Επέλεξες: " + selectedStore.getName(), Toast.LENGTH_SHORT).show();
         });
     }
 }
