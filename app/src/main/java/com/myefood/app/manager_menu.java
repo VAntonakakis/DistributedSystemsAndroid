@@ -75,8 +75,10 @@ public class manager_menu extends AppCompatActivity {
 
         listView.setOnItemClickListener((parent, view, position, id) -> {
             Store selectedStore = storeList.get(position);
-            Intent intent = new Intent(manager_menu.this, add_products.class);
-            intent.putExtra("shopName", selectedStore);
+            String storeName = selectedStore.getName();
+            Intent intent = new Intent(manager_menu.this, activity_manager_view.class);
+            intent.putExtra("store", selectedStore);
+            intent.putExtra("shopNameActual", storeName);
             startActivity(intent);
 
             Toast.makeText(manager_menu.this, "Επέλεξες: " + selectedStore.getName(), Toast.LENGTH_SHORT).show();

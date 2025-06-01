@@ -3,6 +3,7 @@ package com.myefood.app;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -51,6 +52,7 @@ public class Cart extends AppCompatActivity {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.list_item, R.id.storeName, items);
         cartListView.setAdapter(adapter);
+        Log.d("vaggelis", "caiguawefrt: " + cart);
         backButton.setOnClickListener( new View.OnClickListener(){
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), Products.class);
@@ -60,6 +62,8 @@ public class Cart extends AppCompatActivity {
         });
         orderButton.setOnClickListener( new View.OnClickListener(){
             public void onClick(View v) {
+                new RequestFromServer<>(null, "neworder::" + ((Store)getIntent().getSerializableExtra("store")).getStoreID(), cart).start();
+                Log.d("vaggelis", "cart: " + cart);
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
             }

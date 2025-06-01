@@ -1,6 +1,8 @@
 package com.myefood.app;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,14 +13,14 @@ import androidx.core.view.WindowInsetsCompat;
 public class add_products extends AppCompatActivity {
 
     @Override
+    @SuppressLint("MissingInflatedId")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_add_products);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+        String name = ((EditText) findViewById(R.id.ProductName)).getText().toString();
+        String type = ((EditText) findViewById(R.id.ProductType)).getText().toString();
+        double price = Double.parseDouble(((EditText) findViewById(R.id.ProductPrice)).getText().toString());
+        int amount = Integer.parseInt(((EditText) findViewById(R.id.ProductAmount)).getText().toString());
     }
 }

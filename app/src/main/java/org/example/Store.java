@@ -26,7 +26,7 @@ public class Store implements Serializable {
         this.products = new ArrayList<>();
         this.storeID = storeID;
     }
-    
+
     public String getName(){
         return name;
     }
@@ -46,7 +46,7 @@ public class Store implements Serializable {
     public List<Product> getProducts() {
         return products;
     }
-    
+
     public void registerSale(String productName, int productAmmount){
         for (Product product : products) {
             if (product.getName().equals(productName)) {
@@ -54,21 +54,27 @@ public class Store implements Serializable {
             }
         }
     }
-    
+
     public String getAvgPrice(){
         int sum = 0;
-        for (Product product : products) {
-            sum += product.getPrice();
+        if (products.size() > 0) {
+            for (Product product : products) {
+                sum += product.getPrice();
+            }
+            if (sum / products.size() < 5) {
+                return "$";
+            } else if (sum / products.size() < 10) {
+                return "$$";
+            }
+            return "$$$";
         }
-        if (sum/products.size() < 5){return "$";}
-        else if (sum/products.size() < 10){return "$$";}
-        return "$$$";
+        return "no data";
     }
-    
+
     public int getTotalSales(){
-            int sales = 0;
-            for (Product product : products) sales += product.getSales();
-         return sales;}
+        int sales = 0;
+        for (Product product : products) sales += product.getSales();
+        return sales;}
 
     public boolean isWithin5km(double lat, double lon) {
         final int R = 6371; // Radius of the earth in km
@@ -82,7 +88,7 @@ public class Store implements Serializable {
         double distance = R * c; // Distance in km
         return distance <= 5;
     }
-    
+
     public void printProducts(){
         int i = 0;
         for (Product p : products) {
@@ -90,10 +96,10 @@ public class Store implements Serializable {
             System.out.println(i + ". " + p.getName() + " " + p.getType() +" ("+ p.getPrice() + " € )");
         }
     }
-    
+
     public void sell(int p){
         products.get(p).sell(1);
-        }
+    }
 
     @Override
     public String toString() {
@@ -102,13 +108,13 @@ public class Store implements Serializable {
 
     public String detailedToString() {
         String answer = "========================================================================================\nSTORE ID: " + storeID +
-                "\nSTORE NAME: " + name + 
-                "\nSTORE AVERAGE PRICE: " + getAvgPrice() + 
-                "\nSTORE TYPE: " + foodCategory + 
+                "\nSTORE NAME: " + name +
+                "\nSTORE AVERAGE PRICE: " + getAvgPrice() +
+                "\nSTORE TYPE: " + foodCategory +
                 "\nSTORE RATINGS: " + stars + " (" + votes + ")\n"
                 +"========================================================================================\nPRODUCTS:";
-                for(Product p: getProducts()){ answer += p.detailedToString();}
-                return answer +"\n========================================================================================" + "\nSTORE TOTAL SALES: " + getTotalSales() + "\n========================================================================================";
+        for(Product p: getProducts()){ answer += p.detailedToString();}
+        return answer +"\n========================================================================================" + "\nSTORE TOTAL SALES: " + getTotalSales() + "\n========================================================================================";
 
     }
 }

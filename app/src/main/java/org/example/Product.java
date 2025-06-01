@@ -46,4 +46,11 @@ public class Product implements Serializable {
         "\tTYPE: " + type +
         "\tTOTAL SALES: " + sales;
     }
+
+    public String detailedToStringAndroid() {
+        return "\nNAME: " + name +
+                "\nPRICE: " + price +
+                "€\nTYPE: " + type +
+                "\nTOTAL SALES: " + sales;
+    }
 }
